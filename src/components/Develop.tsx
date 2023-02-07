@@ -1,9 +1,11 @@
 import { useRandomContext } from "@/contexts";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { saveAs } from 'file-saver';
 import { useRouter } from "next/router";
 import FontColor from "./FontColor";
 import RandomFontComponent from "./RandomFont";
 import RandomGradientComponent from "./RandomGradient";
+
 export default function Develop() {
   const {
     title,
@@ -64,9 +66,8 @@ export default function Develop() {
       //Dowload Zip file from server
       const response = await fetch("/api/ai/download");
 
-      //return zip
-      const data = await response.blob();
-      return data;
+      const blob = new Blob([(await response.blob())], { type: "application/zip" });
+      saveAs(blob, "astro.zip");
     } catch (error) {}
   };
 
