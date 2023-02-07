@@ -57,7 +57,7 @@ export default async function handler(
       "main": {
         "font": datafile.data[0].font!,
         "tag": "main",
-        "style": `color : ${datafile.data[0].fontColor!}`,
+        "style": `color : ${datafile.data[0].fontColor!}; font-family: ${datafile.data[0].font!};`,
         "class":  datafile.data[0].gradient!
       }
     }
