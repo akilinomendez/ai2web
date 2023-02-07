@@ -20,6 +20,7 @@ export default function Bot() {
   } = useRandomContext();
 
   const [supabase] = useState(() => createBrowserSupabaseClient());
+  const [toxic, setToxic] = useState<boolean>(false);
   const { push } = useRouter();
   useEffect(() => {}, [title, description, products, gradient]);
 
@@ -38,11 +39,14 @@ export default function Bot() {
 
       const datar = await response.json();
       if (datar.status === "Toxicity") {
-        alert("The text is toxic");
+        setToxic(true);
+        setTGen(false);
+        return
       }
 
       setGradient(RandomGradient());
       setTGen(false);
+      setToxic(false);
 
       const { data, error } = await supabase.from("promts").select();
 
@@ -106,7 +110,13 @@ export default function Bot() {
                 className="w-full border-violet-200 bg-transparent border rounded-md text-center"
               />
             </label>
-          </div>
+            </div>
+            {toxic && (
+              <div className="text-red-500 text-center font-bold">
+                <span>Sorry, your text is toxic</span>
+              </div>
+            )}
+
 
           <div className="w-full justify-center flex">
             <button

@@ -115,7 +115,9 @@ export default function Home({
                   <div className="border p-12">
                     <p>
                       To get started, write a message to the bot and it will
-                      generate a website for you.
+                      generate a website for you. 
+                      <br />
+                      The bot detects if you have added a toxic message and returns the error
                       <br />
                       Just write the idea you want to develop and the bot will
                       do the rest. For Example:
